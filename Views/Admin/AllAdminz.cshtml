@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "GPictures";
+    Layout = null;
+}
+
+@RenderPage("~/Views/Shared/_Head2.cshtml")
+@RenderPage("~/Views/Shared/_Navbar2.cshtml")
+<br /><br />
+  <div class="col-md-10" style="margin-bottom:17%">
+     <div class="row">
+  				
+  				<div class="col-md-10">
+  					<div class="content-box-large">
+		  				<div class="panel-heading">
+							<div class="panel-title"><h3>These are all our Register Users</h3></div>
+							
+						</div>
+		  				<div class="panel-body">
+		  					<table class="table">
+				              <thead>
+				                <tr>
+				                  <th>#</th>
+				                  <th>Names</th>
+				                  <th>Email</th>
+                                  <th>Gender</th>
+                                  <th>Date of Birth</th> 
+                                  <th>Status</th>  
+                                  <th>Verified</th> 
+                                  <th>Update</th> 
+                            
+				                </tr>
+				              </thead>
+				              <tbody>
+				                  @foreach(var a in Model)
+                                  {
+				                <tr class="danger">
+				                  <td>@a.Id</td>
+                                  <td>@a.UserName</td>
+				                  <td>@a.Email</td>
+				                  <td>@a.Gender</td>
+                                  <td>@a.BirthDate</td>
+                                  <td>@a.Status</td>
+                                  <td>@a.Verified</td>
+				                  <td><a style="cursor:pointer" id="@a.Id" class="fup7">update</a></td>
+				                 
+
+				                </tr>
+                                  }
+				                
+				              </tbody>
+				            </table>
+		  				</div>
+		  	               
+  		</div>
+  				</div>
+  			</div>
+      	  <div class="col-md-9" id="FNewsUpdate" style="text-align:center;margin-left:0%">
+	  					<div class="content-box-large">
+			  				<div class="panel-heading">
+					            <div class="panel-title"><h3>Review Admin's Registeration</h3></div>
+					          
+					        </div>
+			  				<div class="panel-body">
+			  					<form class="form-horizontal" role="form" action="~/Admin/SaveAdmin" method="post" >
+								  <div class="form-group">
+								    <label for="inputEmail3" class="col-sm-6 control-label">Review the Admin Status(Activate or de-activate)</label>
+								    <div class="col-sm-6">
+                                        <select name="fstatus" class="col-md-8" style="height:30px">
+                                            <option value="" selected >Status</option>
+                                            <option value="Deactive">De-active</option>
+                                            <option value="Active">Active</option>
+                                        </select>
+								    </div>
+								  </div>
+								
+								  <div class="form-group">
+											<label class="col-md-6 control-label">Review the Admin Email Verification</label>
+											<div class="col-md-6">
+                                        <select name="fverify" class="col-md-8" style="height:30px">
+                                            <option value="" selected >Verification</option>
+                                            <option value="Yes">Verified</option>
+                                            <option value="No">Cancel Verification</option>
+                                        </select>
+											</div>
+
+								  </div>
+									<br />
+								  <div class="form-group">
+								    <label class="col-sm-2 control-label">Instructions</label>
+								    <div class="col-sm-10">
+								      <span class="form-control">Press Save to save data/again press insert button</span>
+								    </div>
+								  </div>
+								  <input type="text" name="myId" hidden="hidden" id="id1" /><br />
+                                     
+								  <div class="form-group">
+								    <div class="col-sm-offset-2 col-sm-10">
+								      <button type="submit" class="btn btn-primary" onclick="checkk()">Save</button>
+								    </div>
+								  </div>
+								</form>
+			  				</div>
+			  			</div>
+	  				</div>
+
+      <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+      <script>
+          function checkk() {
+              fstatus = document.form.birthday_day.value,
+                 fverify = document.form.birthday_year.value;
+              if (fstatus == "") {
+                  document.form.birthday_month.focus();
+                  document.getElementById("errorBox").innerHTML = "choose one option of Status";
+                  return false;
+              } else if (fverify == "") {
+                  document.form.birthday_day.focus();
+                  document.getElementById("errorBox").innerHTML = "choose one option of Verification";
+                  return false;
+              }
+              else { return true;}
+          }
+          $(document).ready(function () {
+              $("#FNews").hide();
+              $("#FNewsUpdate").hide();
+              $("#fn").click(function () {
+                  $("#FNews").toggle(500);
+              });
+              $(".fup7").click(function () {
+                  $("#id1").val(this.id);
+                  $("#FNewsUpdate").toggle(500);
+              });
+          });
+      </script>
+  </div>
+
+@RenderPage("~/Views/Shared/Footer2.cshtml")

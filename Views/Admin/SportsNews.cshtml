@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = "SportsNews";
+    Layout = null;
+}
+
+@RenderPage("~/Views/Shared/_Head2.cshtml")
+@RenderPage("~/Views/Shared/_Navbar2.cshtml")
+<br /><br />
+<div class="row">
+  				
+  				<div class="col-md-9">
+  					<div class="content-box-large">
+		  				<div class="panel-heading">
+							<div class="panel-title"><h3> Edit Sports News</h3></div>
+							
+						</div>
+		  				<div class="panel-body">
+		  					<table class="table">
+				              <thead>
+				                <tr>
+				                  <th>#</th>
+				                  <th>Image</th>
+				                  <th>Main Heading</th>
+				                  <th>Sub-Heading</th>
+                                  
+				                  <th>Update</th>
+				                  <th>Delete</th>
+				                </tr>
+				              </thead>
+				              <tbody>
+				                  @foreach(var a in Model)
+                                  {
+                                      var base64 = Convert.ToBase64String(a.Image);
+                                      var imgSrc = String.Format("data:image;base64,{0}", base64);
+				                <tr class="success">
+				                  <td>@a.Id</td>
+                                  <td><img src='@imgSrc' alt="" style="width:70px;height:85px"/></td>
+				                  <td>@a.MainHeading</td>
+				                  <td>@a.SubHeading</td>
+				                  
+				                  <td><a style="cursor:pointer" id="@a.Id" class="fup5">update</a></td>
+				                  <td><a style="cursor:pointer" href="~/Admin/DeleteNews?idd=@a.Id">delete</a></td>
+				                </tr>
+                                  }
+                                   <tr class="success" style="text-align:center">
+				                  <td colspan="6"><a id="fn4" style="cursor:pointer;font-size:20px" class="glyphicon glyphicon-pencil"><b> Insert</b></a></td>
+				                </tr>
+				              </tbody>
+				            </table>
+		  				</div>
+		  	                                     <!--------------------------------------------------Start Flasing Form--------------------------------------------->
+	  <div class="col-md-9" id="FNews4" style="text-align:center;margin-left:8%">
+	  					<div class="content-box-large">
+			  				<div class="panel-heading">
+					            <div class="panel-title"><h3>Insert Sports News</h3></div>
+					          
+					        </div>
+			  				<div class="panel-body">
+			  					<form class="form-horizontal" role="form" action="~/Admin/SaveNews" method="post" enctype="multipart/form-data">
+								  <div class="form-group">
+								    <label for="inputEmail3" class="col-sm-4 control-label">Enter the Main Heading</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" name="MainHeading" id="mainheading" placeholder="main heading">
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label for="inputEmail3" class="col-sm-4 control-label">Enter the Sub-Heading</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" id="subheading" name="SubHeading" placeholder="sub-heading">
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label class="col-sm-4 control-label">Enter the detail of the News</label>
+								    <div class="col-sm-8">
+								      <textarea class="form-control" placeholder="detail" name="Detail" rows="3"></textarea>
+								    </div>
+								  </div>
+									<input type="text" value="5" name="FId" hidden="hidden"/>
+								  <div class="form-group">
+											<label class="col-md-4 control-label">Choose Sliding Image</label>
+											<div class="col-md-8">
+												<input type="file" class="btn btn-default" name="Image" id="exampleInputFile1">
+											</div>
+								  </div>
+									
+								  <div class="form-group">
+								    <label class="col-sm-2 control-label">Instructions</label>
+								    <div class="col-sm-10">
+								      <span class="form-control">Press Save to save data/again press insert button</span>
+								    </div>
+								  </div>
+								  
+								  <div class="form-group">
+								    <div class="col-sm-offset-2 col-sm-10">
+								      <button type="submit" class="btn btn-primary">Save</button>
+								    </div>
+								  </div>
+								</form>
+			  				</div>
+			  			</div>
+	  				</div>
+<!--------------------------------------------------End Flasing Form--------------------------------------------->
+
+                           <!--------------------------------------------------Start Flasing Update Form--------------------------------------------->
+	  <div class="col-md-9" id="FNewsUpdate" style="text-align:center;margin-left:8%">
+	  					<div class="content-box-large">
+			  				<div class="panel-heading">
+					            <div class="panel-title"><h3>Update Flasing News</h3></div>
+					          
+					        </div>
+			  				<div class="panel-body">
+			  					<form class="form-horizontal" role="form" action="/Admin/SaveUpdatedNews" method="post" enctype="multipart/form-data">
+								  <div class="form-group">
+								    <label for="inputEmail3" class="col-sm-4 control-label">Update Main Heading</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" name="MainHeading" id="mainheading1" placeholder="main heading">
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label for="inputEmail3" class="col-sm-4 control-label">Update Sub-Heading</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" id="subheading2" name="SubHeading" placeholder="sub-heading">
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label class="col-sm-4 control-label">Update detail of the News</label>
+								    <div class="col-sm-8">
+								      <textarea class="form-control" placeholder="detail" id="detail1" name="Detail" rows="3"></textarea>
+								    </div>
+								  </div>
+									
+								  <div class="form-group">
+											<label class="col-md-4 control-label">Update Sliding Image</label>
+											<div class="col-md-8">
+												<input type="file" class="btn btn-default" name="Image" id="exampleInputFile2">
+											</div>
+								  </div>
+									
+								  <div class="form-group">
+								    <label class="col-sm-2 control-label">Instructions</label>
+								    <div class="col-sm-10">
+								      <span class="form-control">Press Save to save data/again press insert button</span>
+								    </div>
+								  </div>
+								  <input type="text" name="Id" hidden="hidden" id="id1"/><br />
+                                      <input type="text" name="FId" hidden="hidden" id="fid1"/><br />
+								  <div class="form-group">
+								    <div class="col-sm-offset-2 col-sm-10">
+								      <button type="submit" class="btn btn-primary">Save</button>
+								    </div>
+								  </div>
+								</form>
+			  				</div>
+			  			</div>
+	  				</div>
+<!--------------------------------------------------End Flasing Update Form--------------------------------------------->
+		  			</div>
+  				</div>
+  			</div>
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#FNews4").hide();
+        $("#FNewsUpdate").hide();
+        $("#fn4").click(function () {
+            $("#FNews4").toggle(500);
+        });
+        $(".fup5").click(function () {
+            var k = this.id;
+            
+            $.getJSON("/Admin/GetUpdateData", { key1: k }, function (data) {
+                
+                var obj1 = JSON.stringify(data);
+                var obj2 = JSON.parse(obj1);
+                $("#mainheading1").val(obj2.a3);
+                $("#subheading2").val(obj2.a4);
+                $("#detail1").val(obj2.a5);
+                $("#id1").val(obj2.a1);
+                $("#fid1").val(obj2.a6);
+
+            });
+            $("#FNewsUpdate").toggle(500);
+        });
+    });
+</script>
+
+
+@RenderPage("~/Views/Shared/Footer2.cshtml")
+

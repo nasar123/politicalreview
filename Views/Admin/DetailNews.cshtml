@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "DetailNews";
+    Layout = null;
+}
+
+<div style="margin-top:10%;text-align:center">
+     <img src="~/SliderImage/@Model.Image" alt="" style="width:165px;height:120px;margin-bottom:3%"/>
+<p>@Model.Detail</p>
+    </div>
+
+<div style="margin-top:33%">
+    @RenderPage("~/Views/Shared/Footer2.cshtml")
+    </div>

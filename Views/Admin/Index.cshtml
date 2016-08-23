@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "AdminIndex";
+    Layout = null;
+}
+
+@RenderPage("~/Views/Shared/_Head2.cshtml")
+@RenderPage("~/Views/Shared/_Navbar2.cshtml")
+<br /><br />
+  <div class="col-md-10" style="margin-bottom:17%">
+      <div class="row" style="margin-right:5%">
+		  		<div class="col-md-12 panel-warning">
+		  			<div class="content-box-header panel-heading" >
+						
+						<div class="panel-options" style="margin-left:27%">
+							<a href="~/Admin/FlashingNews" data-rel="reload">
+                               <div class="panel-title " style="color:black"><b>Flashing News(Sliding)</b></div>
+                                <i class="glyphicon glyphicon-cog" style="width:10px;height:10px"></i></a>
+						</div>
+		  			</div>
+		  		</div>
+    </div>
+      <br />
+		  	<div class="row">
+		  		<div class="col-md-6">
+		  			<div class="row">
+		  				<div class="col-md-12">
+		  					<div class="content-box-header">
+								
+								<div class="panel-options">
+									<a href="~/Admin/BreakingNews" data-rel="reload">
+                                       <div class="panel-title" style="color:black"><b>Breaking News(Fix)</b></div>
+                                        <i class="glyphicon glyphicon-cog"></i></a>
+								</div>
+				  			</div>
+				  			
+		  				</div>
+		  			</div> <br />
+                      <div class="row">
+		  				<div class="col-md-12">
+		  					<div class="content-box-header">								
+								<div class="panel-options">
+									<a href="~/Admin/NationalNews" data-rel="reload">
+                                       <div class="panel-title" style="color:black"><b>National News</b></div>
+                                        <i class="glyphicon glyphicon-cog"></i></a>
+								</div>
+				  			</div>
+				  			
+		  				</div>
+		  			</div> <br />
+                      <div class="row">
+		  				<div class="col-md-12">
+		  					<div class="content-box-header">
+								
+								<div class="panel-options">
+
+									<a href="~/Admin/InternationalNews" data-rel="reload">
+                                        <div class="panel-title" style="color:black"><b>International News</b></div>
+                                        <i class="glyphicon glyphicon-cog"></i></a>
+								</div>
+				  			</div>
+				  			
+		  				</div>
+		  			</div>
+		  			
+		  		</div>
+
+
+
+		  		<div class="col-md-6">	
+		  			<div class="row">
+		  				<div class="col-md-12">
+		  					<div class="content-box-header">								
+								<div class="panel-options">
+									<a href="~/Admin/SportsNews" data-rel="reload">
+                                       <div class="panel-title" style="color:black"><b>Sports News</b></div>
+                                        <i class="glyphicon glyphicon-cog"></i></a>
+								</div>
+				  			</div>
+				  			
+		  				</div>
+		  			</div> <br />
+                    <div class="row">
+		  				<div class="col-md-12">
+		  					<div class="content-box-header">								
+								<div class="panel-options">
+									<a href="~/Admin/EntertainmentNews" data-rel="reload">
+                                       <div class="panel-title" style="color:black"><b>Entertainment News</b></div>
+                                        <i class="glyphicon glyphicon-cog"></i></a>
+								</div>
+				  			</div>
+				  			
+		  				</div>
+		  			</div> <br />
+                    <div class="row">
+		  				<div class="col-md-12">
+		  					<div class="content-box-header">								
+								<div class="panel-options">
+									<a href="~/Admin/Editorials" data-rel="reload">
+                                        <div class="panel-title" style="color:black"><b>Popular Editorials</b></div>
+                                        <i class="glyphicon glyphicon-cog"></i></a>
+								</div>
+				  			</div>
+				  			
+		  				</div>
+		  			</div> 
+		  		
+		  		</div>
+		  	</div>
+
+  </div>
+
+@RenderPage("~/Views/Shared/Footer2.cshtml")

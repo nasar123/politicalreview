@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "DetailNews";
+    Layout = null;
+}
+@RenderPage("~/Views/Shared/_Head1.cshtml")
+
+@{
+    var base64 = Convert.ToBase64String(Model.Image);
+    var imgSrc = String.Format("data:image;base64,{0}", base64);
+    
+    }
+<div style="margin-top:2%">
+    
+     <img src='@imgSrc' alt="" style="width:950px;height:400px;margin-bottom:3%;margin-left:16%"/>
+    <hr />
+    <div style="margin-top:2%;margin-left:18%;margin-right:15%;font-size:16px;text-align:justify">
+<p>@Model.Detail </p>
+         
+        </div>
+   
+    </div>
+
+<a href="~/Home/Index" style="float:right"><b>Home</b></a>
+
+    
+   
+    

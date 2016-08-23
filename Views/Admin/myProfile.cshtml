@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "GPictures";
+    Layout = null;
+}
+
+@RenderPage("~/Views/Shared/_Head2.cshtml")
+@RenderPage("~/Views/Shared/_Navbar2.cshtml")
+<br /><br />
+  <div class="col-md-10" style="margin-bottom:17%">
+     <div class="row">
+  				
+  				<div class="col-md-10">
+  					<div class="content-box-large">
+                          <br /><br />
+		  				<div class="panel-heading" style="text-align:center;color:#0094ff">
+							<div class="panel-title"><h3> Welcome Mr.@ViewBag.FN @ViewBag.LN</h3></div>
+							
+						</div>
+		  				<div class="panel-body">
+                              <form method="post" action="~/Admin/UpdateProfile">
+		  					<table class="table">
+				              <thead>
+				                <tr>
+				                  <th>First Name</th>
+				                  <th>Last Name</th>
+				                  <th>Email</th>
+                                  <th>Date of Birth</th>  
+                                  <th>Gender</th>
+                                  <th id="btn" style="color:red">Change Password</th>
+                                  <th>Update</th> 
+				                </tr>
+				              </thead>
+				              <tbody>
+				                 
+				                <tr class="danger">
+                                   <td>@ViewBag.FN</td>
+				                  <td>@ViewBag.LN</td>
+				                  <td>@ViewBag.valid.Email</td>
+                                  <td>@ViewBag.valid.BirthDate</td>
+                                  <td>@ViewBag.valid.Gender</td>
+                                  <td><a href="#" id="up12" style="color:red"><b>change</b></a></td>
+				                  <td><a style="cursor:pointer" id="fup7">update</a></td>
+				                </tr>
+                                  
+                                <tr class="danger" id="upr12">
+				                  <td><input type="text" name="FName" value="@ViewBag.FN" id="fname"/></td>
+                                  <td><input type="text" name="LName" value="@ViewBag.LN" id="lname"/></td>
+				                  <td><input type="text" name="Email" value="@ViewBag.valid.Email" id="email" readonly="readonly"/></td>
+                                  <td><input type="text" name="Birthdate" value="@ViewBag.valid.BirthDate" id="birthdate"/></td>
+                                  <td><input type="text" name="Gender" value="@ViewBag.valid.Gender" id="gender" /></td>
+				                  <td colspan="2"><button type="submit">save</button></td>
+                                   
+				                </tr>  
+				              
+				              </tbody>
+				            </table>
+                            </form>
+		  				</div>
+                          <h4 id="msg2" style="color:red;float:left"></h4>
+		  	               
+  		</div>
+  				</div>
+  			</div>
+      	  <div class="col-md-9" id="FNewsUpdate12" style="text-align:center;margin-left:0%">
+	  					<div class="content-box-large">
+			  				<div class="panel-heading">
+					            <div class="panel-title"><h4>Change Password</h4></div>
+					          <h5 id="msg" style="color:red;float:left"></h5>
+					        </div><br />
+			  				<div class="panel-body">
+			  					<form class="form-horizontal" role="form" >
+								  <div class="form-group">
+								    <div class="col-sm-6">
+                                        <input type="password" class="form-control" name="Password" id="pp1" placeholder="old password"/>
+								    </div>
+								  </div>
+								
+								  <div class="form-group">
+											<div class="col-md-6">
+                                                     <input type="password" class="form-control" name="Password" id="pp2" placeholder="new password"/>
+											</div>
+
+								  </div>
+									<br />
+								  <div class="form-group">
+								    <label class="col-sm-2 control-label">Instructions</label>
+								    <div class="col-sm-10">
+								      <span class="form-control">Press Save to save data/again press insert button</span>
+								    </div>
+								  </div>
+								  <input type="text" name="myId" value="@ViewBag.valid.Id"  id="id1" hidden="hidden"/><br />
+                                     
+								 
+								</form>
+                                   <div class="form-group">
+								    <div class="col-sm-offset-2 col-sm-10">
+								      <button  class="btn btn-primary" id="press" >Save</button>
+								    </div>
+								  </div>
+			  				</div>
+			  			</div>
+	  				</div>
+
+      <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+      <script type="text/javascript">
+          //function checkk() {
+          //    fstatus = document.form.birthday_day.value,
+          //       fverify = document.form.birthday_year.value;
+          //    if (fstatus == "") {
+          //        document.form.birthday_month.focus();
+          //        document.getElementById("errorBox").innerHTML = "choose one option of Status";
+          //        return false;
+          //    } else if (fverify == "") {
+          //        document.form.birthday_day.focus();
+          //        document.getElementById("errorBox").innerHTML = "choose one option of Verification";
+          //        return false;
+          //    }
+          //    else { return true;}
+          //}
+         
+          $(document).ready(function () {
+             
+              $("#FNews").hide();
+              $("#upr12").hide();
+              $("#FNewsUpdate12").hide();
+              $("#up12").click(function () {
+                  $("#FNewsUpdate12").toggle(500);
+              });
+              $("#fup7").click(function () {
+                  $("#upr12").toggle();
+                  $("#btn").toggle();
+                  $("#up12").toggle();
+
+              });
+              $("#press").click(function () {
+                  var x = $("#pp1").val();
+                  var y = $("#pp2").val();
+                  
+                  if (x.match(@ViewBag.valid.Password)) {
+
+                      if (y.length > 4) {
+                          $.getJSON("/Admin/UpPassword", { v1: y }, function (data) {
+                              if (data) {
+                                  $("#FNewsUpdate12").hide();
+                                  $("#msg2").text("password changed successfuly");
+                                  var url = '@Url.Action("Logout", "Admin")';
+                                  window.location.href = url;
+                              }
+                          });
+                      }
+                      else {
+                          $("#msg").text("invalid new password");
+                          $("#pp2").focus();
+                      }
+                  }
+                  else {
+                      $("#msg").text("invalid old password");
+                      $("#pp1").focus();
+                  }
+              });
+          });
+      </script>
+  </div>
+
+@RenderPage("~/Views/Shared/Footer2.cshtml")

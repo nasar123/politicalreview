@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "GPictures";
+    Layout = null;
+}
+
+@RenderPage("~/Views/Shared/_Head2.cshtml")
+@RenderPage("~/Views/Shared/_Navbar2.cshtml")
+<br /><br />
+  <div class="col-md-10" style="margin-bottom:17%">
+     <div class="row">
+  				
+  				<div class="col-md-10">
+  					<div class="content-box-large">
+		  				<div class="panel-heading">
+							<div class="panel-title"><h3>Add/Remove Pictures from Gallary</h3></div>
+							
+						</div>
+		  				<div class="panel-body">
+		  					<table class="table">
+				              <thead>
+				                <tr>
+				                  <th>#</th>
+				                  <th>Image</th>
+				                  <th>Title</th> 
+                                  <th>Update</th>
+                                  <th>Delete</th>     
+				                </tr>
+				              </thead>
+				              <tbody>
+				                  @foreach(var a in Model)
+                                  {
+                                      if (a.Images != null)
+                                      {
+                                          var base64 = Convert.ToBase64String(a.Images);
+                                          var imgSrc = String.Format("data:image;base64,{0}", base64);
+				                <tr >
+				                  <td>@a.Id</td>
+                                  <td><img src='@imgSrc' alt="" style="width:70px;height:85px"/></td>
+				                  <td>@a.Images_Title</td>
+				            
+				                  <td><a style="cursor:pointer" id="@a.Id" class="fup7">update</a></td>
+				                    <td><a style="cursor:pointer" href="~/Admin/DeleteGPictures?idd=@a.Id">delete</a></td>
+
+				                </tr>
+                      }
+                                  }
+				                 <tr class="success" style="text-align:center">
+				                  <td colspan="7"><a id="fn" style="cursor:pointer;font-size:20px" class="glyphicon glyphicon-pencil"><b> Insert</b></a></td>
+				                </tr>
+				              </tbody>
+				            </table>
+		  				</div>
+		  	               
+  		</div>
+  				</div>
+  			</div>
+      	  <div class="col-md-9" id="FNewsUpdate" style="text-align:center;margin-left:0%">
+	  					<div class="content-box-large">
+			  				<div class="panel-heading">
+					            <div class="panel-title"><h3>Update Gallary Pictures</h3></div>
+					          
+					        </div>
+			  				<div class="panel-body">
+			  					<form class="form-horizontal" role="form" action="~/Admin/SaveUpdatedGPictures" method="post" enctype="multipart/form-data">
+								  <div class="form-group">
+								    <label for="inputEmail3" class="col-sm-4 control-label">Update Picture Title</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" name="Images_Title" id="mainheading" placeholder="main heading">
+								    </div>
+								  </div>
+								
+								  <div class="form-group">
+											<label class="col-md-4 control-label">Update Picture</label>
+											<div class="col-md-8">
+												<input type="file" class="btn btn-default" name="Images" id="exampleInputF">
+											</div>
+								  </div>
+									
+								  <div class="form-group">
+								    <label class="col-sm-2 control-label">Instructions</label>
+								    <div class="col-sm-10">
+								      <span class="form-control">Press Save to save data/again press insert button</span>
+								    </div>
+								  </div>
+								  <input type="text" name="Id"  id="id1" hidden="hidden"/><br />
+                                     
+								  <div class="form-group">
+								    <div class="col-sm-offset-2 col-sm-10">
+								      <button type="submit" class="btn btn-primary">Save</button>
+								    </div>
+								  </div>
+								</form>
+			  				</div>
+			  			</div>
+	  				</div>
+
+       <div class="col-md-9" id="FNews" style="text-align:center;margin-left:0%">
+	  					<div class="content-box-large">
+			  				<div class="panel-heading">
+					            <div class="panel-title"><h3>Insert Gallary Pictures</h3></div>
+					          
+					        </div>
+			  				<div class="panel-body">
+			  					<form class="form-horizontal" role="form" action="~/Admin/SaveGPictures" method="post" enctype="multipart/form-data">
+								  <div class="form-group">
+								    <label for="inputEmail3" class="col-sm-4 control-label">Enter the Picture Title</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" name="Images_Title" id="mainheading2" placeholder="main heading">
+								    </div>
+								  </div>
+								
+								  <div class="form-group">
+											<label class="col-md-4 control-label">Choose Image</label>
+											<div class="col-md-8">
+												<input type="file" class="btn btn-default" name="Images" id="exampleInputFile1">
+											</div>
+								  </div>
+									
+								  <div class="form-group">
+								    <label class="col-sm-2 control-label">Instructions</label>
+								    <div class="col-sm-10">
+								      <span class="form-control">Press Save to save data/again press insert button</span>
+								    </div>
+								  </div>
+								  
+								  <div class="form-group">
+								    <div class="col-sm-offset-2 col-sm-10">
+								      <button type="submit" class="btn btn-primary">Save</button>
+								    </div>
+								  </div>
+								</form>
+			  				</div>
+			  			</div>
+	  				</div>
+      <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+      <script>
+          $(document).ready(function () {
+              $("#FNews").hide();
+              $("#FNewsUpdate").hide();
+              $("#fn").click(function () {
+                  $("#FNews").toggle(500);
+              });
+              $(".fup7").click(function () {
+                  var k = this.id;
+                
+                  $.getJSON("/Admin/GetUpdateGPictures", { key1: k }, function (data) {
+                      var obj1 = JSON.stringify(data);
+                      var obj2 = JSON.parse(obj1);
+                      $("#mainheading").val(obj2.a2);
+                      $("#id1").val(obj2.a1);
+                     
+                  });
+                  $("#FNewsUpdate").toggle(500);
+              });
+          });
+      </script>
+  </div>
+
+@RenderPage("~/Views/Shared/Footer2.cshtml")

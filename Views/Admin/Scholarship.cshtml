@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "Scholarship";
+    Layout = null;
+}
+
+@RenderPage("~/Views/Shared/_Head2.cshtml")
+@RenderPage("~/Views/Shared/_Navbar2.cshtml")
+<br /><br />
+<div class="row">
+  				
+  				<div class="col-md-9">
+  					<div class="content-box-large">
+		  				<div class="panel-heading">
+							<div class="panel-title"><h3> Edit Scholarships Details</h3></div>
+							
+						</div>
+		  				<div class="panel-body">
+		  					<table class="table">
+				              <thead>
+				                <tr>
+				                  <th>#</th>
+				                  <th>Heading</th>
+				                  <th>Start Date</th>
+				                  <th>End Date</th>
+				                  <th>Link</th>
+				                  <th>Delete</th>
+				                </tr>
+				              </thead>
+				              <tbody>
+                                  @foreach(var a in Model)
+                                  {
+				                <tr class="success">
+				                  <td>@a.Id</td>
+                                  <td>@a.MainHeading</td>
+				                  <td>@a.StartDate</td>
+				                  <td>@a.EndDate</td>
+				                  <td><a href="@a.ELink" >@a.ELink</a></td>
+				                  <td><a style="cursor:pointer" href="~/Admin/DeleteScholarships?idd=@a.Id">delete</a></td>
+				                </tr>
+                                  }
+				                 <tr class="success" style="text-align:center">
+				                  <td colspan="6"><a id="fn" style="cursor:pointer;font-size:20px" class="glyphicon glyphicon-pencil"><b> Insert</b></a></td>
+				                </tr>
+				              </tbody>
+				            </table>
+		  				</div>
+
+                        <!--------------------------------------------------Start Flasing Form--------------------------------------------->
+	  <div class="col-md-9" id="FNews" style="text-align:center;margin-left:8%">
+	  					<div class="content-box-large">
+			  				<div class="panel-heading">
+					            <div class="panel-title"><h3>Insert New Scholarship</h3></div>
+					          
+					        </div>
+			  				<div class="panel-body">
+			  					<form class="form-horizontal" role="form" action="~/Admin/SaveScholarships" method="post" enctype="multipart/form-data">
+								  <div class="form-group">
+								    <label for="inputEmail3" class="col-sm-4 control-label">Enter the Main Heading</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" name="MainHeading" id="mainheading" placeholder="main heading">
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label for="inputEmail3" class="col-sm-4 control-label">Enter the start date to apply</label>
+								    <div class="col-sm-8">
+								      <input type="date" class="form-control" id="subheading" name="StartDate" >
+								    </div>
+								  </div>
+                                 <div class="form-group">
+								    <label for="inputEmail3" class="col-sm-4 control-label">Enter the Last date to apply</label>
+								    <div class="col-sm-8">
+								      <input type="date" class="form-control" id="subheading3" name="EndDate" >
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label class="col-sm-4 control-label">Enter the detail about Scholarship</label>
+								    <div class="col-sm-8">
+								      <textarea class="form-control" placeholder="detail" name="Detail" rows="3"></textarea>
+								    </div>
+								  </div>
+                                   <div class="form-group">
+								    <label for="inputEmail3" class="col-sm-4 control-label">Enter the Link for more details</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" id="subheading4" name="ELink" >
+								    </div>
+								  </div>
+									<input type="text" value="1" name="FId" hidden="hidden"/>
+								 
+									
+								  <div class="form-group">
+								    <label class="col-sm-2 control-label">Instructions</label>
+								    <div class="col-sm-10">
+								      <span class="form-control">Press Save to save data/again press insert button</span>
+								    </div>
+								  </div>
+								  
+								  <div class="form-group">
+								    <div class="col-sm-offset-2 col-sm-10">
+								      <button type="submit" class="btn btn-primary">Save</button>
+								    </div>
+								  </div>
+								</form>
+			  				</div>
+			  			</div>
+	  				</div>
+<!--------------------------------------------------End Flasing Form--------------------------------------------->
+
+
+		  			</div>
+  				</div>
+
+  			</div>
+
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#FNews").hide();
+        $("#FNewsUpdate").hide();
+        $("#fn").click(function () {
+            $("#FNews").toggle(500);
+        });
+        
+       
+    });
+</script>
+
+@RenderPage("~/Views/Shared/Footer2.cshtml")
+

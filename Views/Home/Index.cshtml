@@ -1,0 +1,173 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+@RenderPage("~/Views/Shared/_Head1.cshtml")
+<p></p>
+<div class="wrapper col0">
+  <div id="topline">
+    <p>Tel: xxxxx xxxxxxxxxx | Mail: info@domain.com</p>
+    <ul>
+      <li><a href="http://www.akhbar-e-jehan.com/" target="_blank">Sunday-Magazine</a></li>
+      <li><a href="~/Admin/Index">Admin</a></li>
+        <li><a href="http://harvardpolitics.com/" target="_blank">Harvard Political Review</a></li>
+    </ul>
+    <br class="clear" />
+  </div>
+</div>
+<!-- ####################################################################################################### -->
+<div class="wrapper">
+  <div id="header">
+    <div class="fl_left">
+      <h1><a href="~/Home/Index"><strong>P</strong>litical <strong>R</strong>eview</a></h1>
+      <p>Magzine</p>
+    </div>
+      
+    <div class="fl_right"><a href="#"><img src="~/images/pakistan-flag-animation.gif" alt="" style="height:90%;margin-left:70%"/></a></div>
+    <br class="clear" />
+  </div>
+</div>
+<!-- ####################################################################################################### -->
+@RenderPage("~/Views/Shared/_Navbar.cshtml");
+<!-- ####################################################################################################### -->
+<div class="wrapper">
+  <div class="container">
+    <div class="content">
+      <div id="featured_slide">
+        <ul id="featurednews">
+            
+            @foreach(var a in ViewBag.AllFNews)
+            {
+                var base64 = Convert.ToBase64String(a.Image);
+                var imgSrc = String.Format("data:image;base64,{0}", base64);
+          <li><img src='@imgSrc' style="width:1500px;height:700px" alt="" />
+            <div class="panel-overlay">
+              <h2>@a.MainHeading</h2>
+              <p>@a.SubHeading<br />
+                <a href="~/Home/DetailNews?k=@a.Id">Continue Reading &raquo;</a></p>
+            </div>
+          </li>
+            }
+        </ul>
+      </div>
+    </div>
+
+    <div class="column">
+      <ul class="latestnews">
+          @foreach(var b in ViewBag.AllBNews)
+          {
+              var base64 = Convert.ToBase64String(b.Image);
+              var imgSrc = String.Format("data:image;base64,{0}", base64);
+        <li><img src='@imgSrc' alt="" style="width:100px;height:100px"/>
+          <p><strong>@b.MainHeading</strong></p><br />
+          <p>@b.SubHeading</p>
+          <br /><p class="readmore"><a href="~/Home/DetailNews?k=@b.Id">More &raquo;</a></p>
+        </li>
+          }
+      </ul>
+    </div>
+    <br class="clear" />
+  </div>
+
+</div>
+
+<!-- ####################################################################################################### -->
+<div class="wrapper">
+  <div id="adblock">
+    <div class="fl_left"><a href="#"><img src="~/images/jacque-e14228269016371.jpg" alt="" style="height:110px;width:460px"/></a></div>
+    <div class="fl_right"><a href="#"><img src="~/images/Facebook-Covers-Headers-Banners-Allama-Iqbal-Poetry-25.jpg" alt="" style="height:110px;width:450px"/></a></div>
+      
+    <br class="clear" />
+  </div>
+  <div id="hpage_cats">
+     
+    <div class="fl_left">
+      <h2><a href="#">National &raquo;</a></h2>
+     @foreach(var c in ViewBag.AllNNews)
+      {
+          var base64 = Convert.ToBase64String(c.Image);
+          var imgSrc = String.Format("data:image;base64,{0}", base64);
+      <img src='@imgSrc'  style="width:100px;height:105px" alt="" />
+      <p><strong>@c.MainHeading</strong></p>
+      <p>@c.SubHeading</p>
+      <p class="readmore"><a href="~/Home/DetailNews?k=@c.Id">Continue Reading &raquo;</a></p><br /><br /><br /><br /><br />
+      }
+    </div>
+      
+    <div class="fl_right">
+      <h2><a href="#">International &raquo;</a></h2>
+      @foreach(var d in ViewBag.AllINews)
+      {
+          var base64 = Convert.ToBase64String(d.Image);
+          var imgSrc = String.Format("data:image;base64,{0}", base64);
+      <img src='@imgSrc' alt="" style="width:100px;height:105px"/>
+      <p><strong>@d.MainHeading</strong></p>
+      <p>@d.SubHeading</p>
+      <p class="readmore"><a href="~/Home/DetailNews?k=@d.Id">Continue Reading &raquo;</a></p><br /><br /><br /><br /><br />
+      }
+    </div>
+    <br class="clear" />
+    <div class="fl_left">
+      <h2><a href="#">Sports &raquo;</a></h2>
+   @foreach(var c in ViewBag.AllSNews)
+      {
+          var base64 = Convert.ToBase64String(c.Image);
+          var imgSrc = String.Format("data:image;base64,{0}", base64);
+      <img src='@imgSrc' alt="" style="width:100px;height:105px"/>
+      <p><strong>@c.MainHeading</strong></p>
+      <p>@c.SubHeading</p>
+      <p class="readmore"><a href="~/Home/DetailNews?k=@c.Id">Continue Reading &raquo;</a></p><br /><br /><br /><br /><br />
+      }
+    </div>
+    <div class="fl_right">
+      <h2><a href="#">Entertainment &raquo;</a></h2>
+      @foreach(var c in ViewBag.AllENews)
+      {
+          var base64 = Convert.ToBase64String(c.Image);
+          var imgSrc = String.Format("data:image;base64,{0}", base64);
+      <img src='@imgSrc' alt="" style="width:100px;height:105px"/>
+      <p><strong>@c.MainHeading</strong></p>
+      <p>@c.SubHeading</p>
+      <p class="readmore"><a href="~/Home/DetailNews?k=@c.Id">Continue Reading &raquo;</a></p><br /><br /><br /><br /><br />
+      }
+    </div>
+    <br class="clear" />
+  </div>
+</div>
+<!-- ####################################################################################################### -->
+<div class="wrapper">
+  <div class="container">
+    <div class="content">
+      <div id="hpage_latest">
+        <h2>Popular Editorials</h2>
+        <ul>
+            @foreach(var d in ViewBag.AllEd)
+            {
+                var base64 = Convert.ToBase64String(d.Image);
+                var imgSrc = String.Format("data:image;base64,{0}", base64);
+          <li><img src='@imgSrc' alt="" style="width:165px;height:120px"/>
+            <p>@d.MainHeading</p>
+            <p>@d.SubHeading</p>
+            <p class="readmore"><a href="~/Home/DetailNews?k=@d.Id">Continue Reading &raquo;</a></p>
+          </li>
+            }
+        </ul>
+        <br class="clear" />
+      </div>
+    </div>
+    <div class="column">
+      <div class="holder"><a href="https://www.google.pt/search?q=quaid+e+azam+old+and+rare+photos&hl=en&biw=1366&bih=599&tbm=isch&tbo=u&source=univ&sa=X&sqi=2&ved=0ahUKEwiNnMDE5dLMAhWmC8AKHd2rBRkQsAQIGg" target="_blank"><img src="~/images/jinnah-all-india-muslim-league-lahore.jpg" alt="" style="width:96%;height:90%" /></a></div>
+      <div class="holder"><a href="https://www.google.pt/search?q=quaid+e+azam+old+and+rare+photos&hl=en&biw=1366&bih=599&tbm=isch&tbo=u&source=univ&sa=X&sqi=2&ved=0ahUKEwiNnMDE5dLMAhWmC8AKHd2rBRkQsAQIGg#hl=en&tbm=isch&q=quaid+e+azam+sayings+photos" target="_blank"><img src="~/images/There-is-no-power-on-earth-that-can-undo-pakistan-facebook-covers-3426.jpg" style="width:290px;height:110px" alt="" /></a></div>
+        
+    </div>
+    <br class="clear" />
+  </div>
+        <object width="604" height="21"><cke:param name="movie" value="http://www.foxnews.com/i/redes/ticker.embed.swf"></cke:param><cke:param name="allowscriptaccess" value="always"></cke:param><cke:embed src="http://www.foxnews.com/i/redes/ticker.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="604" height="21"> </cke:embed></object>
+
+</div>
+
+
+@RenderPage("~/Views/Shared/_Footer1.cshtml")
+
+

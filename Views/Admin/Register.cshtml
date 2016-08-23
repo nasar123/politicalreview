@@ -1,0 +1,410 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+
+@RenderPage("~/Views/Shared/_Head2.cshtml")
+
+ 
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>@ViewBag.Title</title>
+<style>
+*{
+	margin:0px;
+	padding:0px;
+	}
+body{
+	font-family:Tahoma, Geneva, sans-serif;
+    background-image:url(/images/1212.jpg);
+	}
+#container{
+	width:550px;
+	background-color:rgba(250, 250, 252, 0.40);
+	margin:auto;
+	margin-top:10px;
+	margin-bottom:10px;
+	box-shadow:0 0 3px #999;
+	}
+#container_body{
+	padding:20px;
+	}
+.form_title{
+	font-size:35px;
+	color:#141823;
+	text-align:center;
+	padding:10px;
+	font-weight:normal;
+	}
+.head_para{
+	font-size:19px;
+	color:#99a2a7;
+	text-align:center;
+	font-weight:normal;
+	}
+#form_name{
+	padding:25px 0 0 15px;
+	}
+.firstnameorlastname{
+	 margin-right:20px;
+	}
+.input_name{
+	width:207px;
+	padding:5px;
+	font-size:18px;
+	}
+#email_form{
+	clear:both;
+	padding:15px 0 10px 0px;
+	}
+.input_email{
+	width:434px;
+	padding:5px;
+	font-size:18px;
+	}
+#Re_email_form{
+	padding:10px 0 10px 0px;
+	}
+.input_Re_email{
+	width:434px;
+	padding:5px;
+	font-size:18px;
+	}
+#password_form{
+	padding:10px 0 10px 0px;
+	}
+.input_password{
+	width:434px;
+	padding:5px;
+	font-size:18px;
+	}
+.birthday_title{
+	font-size:16px; 
+	color:#141823; 
+	font-weight:700;
+	padding:0 0 10px 0;
+	}
+select{
+	padding:5px;
+	}
+#birthday{
+	font-size:12px;
+	color:#8b919d;
+	padding-top:10px;
+	}
+#radio_button{
+	padding:10px 0 0 0;
+	}
+#sign_user{
+	font-size:14px;
+	color:#FFF;
+	text-align:center;
+	background-color:#3B5998;
+	padding:10px;
+	margin-top:10px;
+	cursor: pointer;
+	}
+#errorBox{
+	color:#F00;
+	}
+
+
+
+</style>
+        <script src="~/js/prefixfree.min.js"></script>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+    
+    function ifEmailExists() {
+        var res = true;
+        var email2 = document.form.Email.value;
+        var result = $.ajax({
+            type: "GET",
+            url: "CheckE",
+            data: { un: email2 },
+            dataType: "text",
+            async: false
+        });
+        result.done(function (resp) {
+            if (resp == "false") {
+                res = true;
+            }
+            else { res = false;}
+            return resp;
+        });
+        return res;
+    }
+
+    function Submit() {
+
+        var emailRegex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+        var name_exp = /^[A-Za-z\s]+$/;
+        var fname = document.form.Name.value,
+		lname = document.form.LastName.value,
+		femail = document.form.Email.value,
+		freemail = document.form.enterEmail.value,
+		fpassword = document.form.Password.value,
+        cpassword = document.form.Password2.value,
+		fmonth = document.form.birthday_month.value,
+		fday = document.form.birthday_day.value,
+		fyear = document.form.birthday_year.value;
+        fgender = document.form.radiobutton.value;
+      
+    if( fname == "" )
+    {
+        document.form.Name.focus() ;
+        document.getElementById("errorBox").innerHTML = "enter the first name";
+        return false;
+    } else if (!fname.match(name_exp)) {
+        document.form.Name.focus();
+        document.getElementById("errorBox").innerHTML = "enter valid first name";
+        return false;
+    } else if (fname.length < 2) {
+        document.form.Name.focus();
+        document.getElementById("errorBox").innerHTML = "enter first name with greater than 2 length";
+        return false;
+    }
+    if( lname == "" )
+    {
+        document.form.LastName.focus() ;
+        document.getElementById("errorBox").innerHTML = "enter the last name";
+        return false;
+    } else if (!lname.match(name_exp)) {
+        document.form.LastName.focus();
+        document.getElementById("errorBox").innerHTML = "enter valid last name";
+        return false;
+    } else if (lname.length < 2) {
+        document.form.LastName.focus();
+        document.getElementById("errorBox").innerHTML = "enter last name with greater than 2 length";
+        return false;
+    }
+   
+    if (femail == "" )
+    {
+        document.form.Email.focus();
+        document.getElementById("errorBox").innerHTML = "enter the email";
+        return false;
+    }else if(!emailRegex.test(femail)){
+        document.form.Email.focus();
+        document.getElementById("errorBox").innerHTML = "enter the valid email";
+        return false;
+    }
+    else if (!ifEmailExists())
+    {
+        document.form.Email.focus();
+        document.getElementById("errorBox").innerHTML = "this email is already registered";
+        return false;
+    }
+	 
+    if (freemail == "" )
+    {
+        document.form.enterEmail.focus();
+        document.getElementById("errorBox").innerHTML = "Re-enter the email";
+        return false;
+    }else if(!emailRegex.test(freemail)){
+        document.form.enterEmail.focus();
+        document.getElementById("errorBox").innerHTML = "Re-enter the valid email";
+        return false;
+    }
+	 
+    if(freemail !=  femail){
+        document.form.enterEmail.focus();
+        document.getElementById("errorBox").innerHTML = "emails are not matching, re-enter again";
+        return false;
+    }
+	 
+	 
+    if(fpassword == "")
+    {
+        document.form.Password.focus();
+        document.getElementById("errorBox").innerHTML = "enter the password";
+        return false;
+    } else if (fpassword.length < 5) {
+        document.form.Password.focus();
+        document.getElementById("errorBox").innerHTML = "password length must be greater than 4";
+        return false;
+    }
+
+    if (cpassword == "") {
+        document.form.Password2.focus();
+        document.getElementById("errorBox").innerHTML = "re-enter the password for confirmation";
+        return false;
+    } else if (!cpassword.match(fpassword)) {
+        document.form.Password2.focus();
+        document.getElementById("errorBox").innerHTML = "passwords are not matching please re-enter password";
+        return false;
+    }
+	 
+    if (fmonth == "") {
+        document.form.birthday_month.focus();
+        document.getElementById("errorBox").innerHTML = "select the birthday month";
+        return false;
+    }
+    if (fday == "") {
+        document.form.birthday_day.focus();
+        document.getElementById("errorBox").innerHTML = "select the birthday day";
+        return false;
+    }
+    if (fyear == "") {
+        document.form.birthday_year.focus();
+        document.getElementById("errorBox").innerHTML = "select the birthday year";
+        return false;
+    }
+    if(document.form.radiobutton[0].checked == false && document.form.radiobutton[1].checked == false){
+        document.getElementById("errorBox").innerHTML = "select your gender";
+        return false;
+    }
+    if (fname != '' && lname != '' && femail != '' && freemail != '' && fpassword != '' && fmonth != '' && fday != '' && fyear != '') {
+        document.getElementById("errorBox").onwaiting(5000);
+                document.getElementById("errorBox").innerHTML = "you registered successfully...";
+    }
+		  
+    }
+
+    
+    
+</script>
+</head>
+
+
+<body>
+
+<div id="description"></div>
+<!--container start-->
+<div id="container">
+  <div id="container_body">
+    <div style="margin-top:-3%">
+      <h3 class="form_title"><span style="font-size:38px;color:#3B5998"><b>P</b></span>olitical<span style="font-size:38px;color:#3B5998"><b>R</b></span>eview Magazine Registration Form <small><span style="color:#3B5998">It's Free</span></small></h3>
+    </div>
+    <!--Form  start-->
+    <div id="form_name" style="margin-top:-2%">
+        <form name="form" method="post" action="~/Admin/SaveRegister" onsubmit="return Submit();">
+      <div class="firstnameorlastname">
+       
+       <div id="errorBox" style="font-weight:700;font-size:13px;position:absolute;margin-top:-1.5%;background-color:white"></div>
+        <input type="text" name="Name" value="" placeholder="First Name"  class="input_name" >
+        <input type="text" name="LastName" value="" placeholder="Last Name" class="input_name" >
+        
+      </div>
+      <div id="email_form">
+        <input type="text" name="Email" value=""  placeholder="Your Email" class="input_email">
+      </div>
+      <div id="Re_email_form">
+        <input type="text" name="enterEmail" value=""  placeholder="Re-enter Email" class="input_Re_email">
+      </div>
+      <div id="password_form">
+        <input type="password" name="Password" value=""  placeholder="Password" class="input_password">
+      </div>
+         <div id="password_form2">
+        <input type="password" name="Password2" value=""  placeholder="Confirm Password" class="input_password">
+      </div>
+      <!--birthday details start-->
+      <div style="margin-top:-1%">
+        <h3 class="birthday_title">Birthday</h3>
+      </div>
+      <div style="margin-top:-2%">
+        <select name="birthday_month" >
+          <option value="" selected >Month</option>
+          <option value="1">Jan</option>
+          <option value="2">Feb</option>
+          <option value="3">Mar</option>
+          <option value="4">Apr</option>
+          <option value="5">May</option>
+          <option value="6">Jun</option>
+          <option value="7">Jul</option>
+          <option value="8">Aug</option>
+          <option value="9">Sep</option>
+          <option value="10">Oct</option>
+          <option value="11">Nov</option>
+          <option value="12">Dec</option>
+        </select>
+        &nbsp;&nbsp;
+        <select name="birthday_day" >
+          <option value="" selected>Day</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>
+        </select>
+        &nbsp;&nbsp;
+        <select name="birthday_year">
+          <option value="" selected>Year</option>
+          <option value="2013">2013</option>
+          <option value="2012">2012</option>
+          <option value="2011">2011</option>
+          <option value="2010">2010</option>
+          <option value="2009">2009</option>
+          <option value="2008">2008</option>
+          <option value="2007">2007</option>
+          <option value="2006">2006</option>
+          <option value="2005">2005</option>
+          <option value="2004">2004</option>
+          <option value="2003">2003</option>
+          <option value="2002">2002</option>
+          <option value="2001">2001</option>
+          <option value="2000">2000</option>
+          <option value="1999">1999</option>
+          <option value="1998">1998</option>
+          <option value="1997">1997</option>
+          <option value="1996">1996</option>
+          <option value="1995">1995</option>
+          <option value="1994">1994</option>
+          <option value="1993">1993</option>
+          <option value="1992">1992</option>
+          <option value="1991">1991</option>
+          <option value="1990">1990</option>
+        </select>
+      </div>
+      <!--birthday details ends-->
+      <div id="radio_button" style="margin-top:-1%">
+        <input type="radio" name="radiobutton" value="Female">
+        <label >Female</label>
+        &nbsp;&nbsp;&nbsp;
+        <input type="radio" name="radiobutton" value="Male">
+        <label >Male</label>
+      </div>
+       <div>
+           <br />
+        <Button  style="width:93%;margin-top:-3%" type="submit" id="sign_user">Sign Up</Button><br />
+      </div>
+     </form>
+         <a href="~/Admin/Login" style="color:white"><p id="ds"><b>Sign In </b></p></a>
+    </div>
+   
+    <!--form ends--> 
+  </div>
+</div>
+<!--container ends-->
+</body>
+</html>
+
+@RenderPage("~/Views/Shared/Footer2.cshtml")

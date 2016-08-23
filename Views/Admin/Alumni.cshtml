@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Alumni";
+    Layout = null;
+}
+
+@RenderPage("~/Views/Shared/_Head2.cshtml")
+@RenderPage("~/Views/Shared/_Navbar2.cshtml")
+<br /><br />
+<div class="row">
+  				
+  				<div class="col-md-9">
+  					<div class="content-box-large">
+		  				<div class="panel-heading">
+							<div class="panel-title"><h3> Edit Alumni Information</h3></div>
+							
+						</div>
+		  				<div class="panel-body">
+		  					<table class="table">
+				              <thead>
+				                <tr>
+				                  <th>#</th>
+				                  <th>Image</th>
+				                  <th>Name</th>
+				                  <th>Achivement</th>
+                                  
+				                  <th>Update</th>
+				                  
+				                </tr>
+				              </thead>
+				              <tbody>
+				                  @foreach(var a in Model)
+                                  {
+                                      var base64 = Convert.ToBase64String(a.Image);
+                                      var imgSrc = String.Format("data:image;base64,{0}", base64);
+				                <tr class="danger">
+				                  <td>@a.Id</td>
+                                  <td><img src='@imgSrc' alt="" style="width:70px;height:85px"/></td>
+				                  <td>@a.Name</td>
+				                  <td>@a.Achivement</td>
+				                  
+				                  <td><a style="cursor:pointer" id="@a.Id" class="fup7">update</a></td>
+				                 
+				                </tr>
+                                  }
+				                
+				              </tbody>
+				            </table>
+		  				</div>
+		  	               
+                           <!--------------------------------------------------Start Flasing Update Form--------------------------------------------->
+	  <div class="col-md-9" id="FNewsUpdate" style="text-align:center;margin-left:8%">
+	  					<div class="content-box-large">
+			  				<div class="panel-heading">
+					            <div class="panel-title"><h3>Update Alumni Information</h3></div>
+					          
+					        </div>
+			  				<div class="panel-body">
+			  					<form class="form-horizontal" role="form" action="~/Admin/SaveUpdatedAlumni" method="post" enctype="multipart/form-data">
+								  <div class="form-group">
+								    <label for="inputEmail3" class="col-sm-4 control-label">Update Name</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" name="Name" id="mainheading1" placeholder="main heading">
+								    </div>
+								  </div>
+		
+								  <div class="form-group">
+								    <label class="col-sm-4 control-label">Update Achivement</label>
+								    <div class="col-sm-8">
+								      <textarea class="form-control" id="detail1" name="Achivement" rows="3"></textarea>
+								    </div>
+								  </div>
+								
+								  <div class="form-group">
+											<label class="col-md-4 control-label">Update Sliding Image</label>
+											<div class="col-md-8">
+												<input type="file" class="btn btn-default" name="Pic" id="exampleInputFile2">
+											</div>
+								  </div>
+									
+								  <div class="form-group">
+								    <label class="col-sm-2 control-label">Instructions</label>
+								    <div class="col-sm-10">
+								      <span class="form-control">Press Save to save data/again press insert button</span>
+								    </div>
+								  </div>
+								  <input type="text" name="Id" hidden="hidden" id="id1"/><br />
+                                     
+								  <div class="form-group">
+								    <div class="col-sm-offset-2 col-sm-10">
+								      <button type="submit" class="btn btn-primary">Save</button>
+								    </div>
+								  </div>
+								</form>
+			  				</div>
+			  			</div>
+	  				</div>
+<!--------------------------------------------------End Flasing Update Form--------------------------------------------->
+		  			</div>
+  				</div>
+  			</div>
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+       
+        $("#FNewsUpdate").hide();
+      
+        $(".fup7").click(function () {
+            var k = this.id;
+
+            $.getJSON("/Admin/GetUpdateAlumni", { key1: k }, function (data) {
+                var obj1 = JSON.stringify(data);
+                var obj2 = JSON.parse(obj1);
+                $("#mainheading1").val(obj2.a2);
+                $("#detail1").val(obj2.a3);
+                $("#id1").val(obj2.a1);
+                $("#mainheading1").focus();
+            
+            });
+            $("#FNewsUpdate").toggle(500);
+        });
+    });
+</script>
+
+
+@RenderPage("~/Views/Shared/Footer2.cshtml")
+
+

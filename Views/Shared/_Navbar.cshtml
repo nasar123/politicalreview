@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "_Navbar";
+    Layout = null;
+}
+
+<div class="wrapper col2">
+  <div id="topbar">
+    <div id="topnav">
+      <ul>
+        <li class="active"><a href="~/Home/Index">Home</a></li>
+        <li><a href="~/Home/Magazine">E-Magzine</a></li>
+        <li><a href="#">My Department</a>
+          <ul>
+            <li><a href="~/Home/Scholarship">Scholorships</a></li>
+            <li><a href="~/Home/Alumni">Alumni</a></li>
+            <li><a href="#">Book Review</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Gallery</a>
+          <ul>
+            <li><a href="~/Home/Gallary">Photos</a></li>
+            <li><a href="~/Home/VGallery">Videos</a></li>
+          </ul>
+        </li>
+        <li><a href="~/Home/Contactus">Contact us</a></li>
+        <li class="last"><a href="~/Home/Aboutus">About us</a></li>
+      </ul>
+    </div>
+    <div id="search">
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Site Search</legend>
+          <input type="text" value="Search Our Website&hellip;"  onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
+          <input type="submit" name="go" id="go" value="Search" />
+        </fieldset>
+      </form>
+    </div>
+    <br class="clear" />
+  </div>
+</div>

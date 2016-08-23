@@ -30,6 +30,7 @@
 				              <tbody>
 				                  @foreach(var a in Model)
                                   {
+                          if(a.Image!=null){
                                       var base64 = Convert.ToBase64String(a.Image);
                                       var imgSrc = String.Format("data:image;base64,{0}", base64);
 				                <tr class="success">
@@ -41,6 +42,7 @@
 				                  <td><a style="cursor:pointer" id="@a.Id" class="fup2">update</a></td>
 				                  
 				                </tr>
+                      }
                                   }
                                   
 				              </tbody>

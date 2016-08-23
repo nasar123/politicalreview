@@ -57,6 +57,7 @@
       <ul class="latestnews">
           @foreach(var b in ViewBag.AllBNews)
           {
+              if(b.Image!=null){
               var base64 = Convert.ToBase64String(b.Image);
               var imgSrc = String.Format("data:image;base64,{0}", base64);
         <li><img src='@imgSrc' alt="" style="width:100px;height:100px"/>
@@ -64,6 +65,7 @@
           <p>@b.SubHeading</p>
           <br /><p class="readmore"><a href="~/Home/DetailNews?k=@b.Id">More &raquo;</a></p>
         </li>
+          }
           }
       </ul>
     </div>

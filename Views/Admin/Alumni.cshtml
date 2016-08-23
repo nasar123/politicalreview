@@ -52,7 +52,7 @@
 		  				</div>
 		  	               
                            <!--------------------------------------------------Start Flasing Update Form--------------------------------------------->
-	  <div class="col-md-9" id="FNewsUpdate12" style="text-align:center;margin-left:8%">
+	  <div class="col-md-9" id="FNewsUpdate" style="text-align:center;margin-left:8%">
 	  					<div class="content-box-large">
 			  				<div class="panel-heading">
 					            <div class="panel-title"><h3>Update Alumni Information</h3></div>
@@ -99,7 +99,11 @@
 			  			</div>
 	  				</div>
 <!--------------------------------------------------End Flasing Update Form--------------------------------------------->
-		  			</div>
+		  			<form method="post" action="~/Admin/SaveAL" enctype="multipart/form-data">
+                          <input type="file" name="image"/>
+                          <input type="submit" value="save"/>
+		  			</form>
+                      </div>
   				</div>
   			</div>
 <script src="~/Scripts/jquery-1.7.1.min.js"></script>
